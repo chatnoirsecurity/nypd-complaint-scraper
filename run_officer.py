@@ -12,13 +12,13 @@ with open('officer.csv', 'w') as csvfh:
 
     restart_token = None
     for i in range(0,100):
-        j = fetch.fetch_officer_data(limit=10000, restart_token=restart_token)
+        j = fetch.fetch_inactive_officer_data(limit=10000, restart_token=restart_token)
+        #j = fetch.fetch_active_officer_data(limit=10000, restart_token=restart_token)
 
         print("writing raw to dump{}".format(i))
         with open("scratch/o{}".format(i), "w") as dfh:
             json.dump(j, dfh)
 
-        import pdb; pdb.set_trace()
 
         rows = extract.extract(j)
 
@@ -29,5 +29,5 @@ with open('officer.csv', 'w') as csvfh:
             raise SystemExit("No more results in this dataset")
         print(restart_token)
     
-        #print("sleeping 5....")
-        #sleep(5)
+        print("sleeping 5....")
+        sleep(5)

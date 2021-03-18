@@ -4,6 +4,8 @@ from pprint import pp
 
 QUERY_URL = 'https://wabi-us-gov-virginia-api.analysis.usgovcloudapi.net/public/reports/querydata?synchronous=true'
 
+
+
 HEADERS = {
     'Connection': 'keep-alive',
     'sec-ch-ua': '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
@@ -23,9 +25,15 @@ HEADERS = {
 }
 
 # jank jank jank jank jank jank jank jank
-OFFICER_INFO_QUERY = { "version": "1.0.0", "queries": [ { "Query": { "Commands": [ { "SemanticQueryDataShapeCommand": { "Query": { "Version": 2, "From": [ { "Name": "q1", "Entity": "CCRB Active - Oracle", "Type": 0 } ], "Select": [ { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Unique Id" }, "Name": "Query1.Unique Id" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Command" }, "Name": "Query1.Command1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Last Name" }, "Name": "Query1.Last Name1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "First Name" }, "Name": "Query1.First Name1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Rank" }, "Name": "Query1.Rank1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Shield No" }, "Name": "Query1.ShieldNo" } ], "OrderBy": [ { "Direction": 1, "Expression": { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Unique Id" } } } ] }, "Binding": { "Primary": { "Groupings": [ { "Projections": [ 0, 1, 2, 3, 4, 5 ] } ] }, "DataReduction": { "DataVolume": 3, "Primary": { "Window": { "Count": 500 } } }, "Version": 1 } } } ] }, "QueryId": "", "ApplicationContext": { "DatasetId": "523ab509-8e2d-43ed-bfad-11fcd05180d7", "Sources": [ { "ReportId": "f508555a-b39d-4c10-8d46-a14bc282e079" } ] } } ], "cancelQueries": [], "modelId": 404287 }
+ACTIVE_OFFICER_INFO_QUERY = { "version": "1.0.0", "queries": [ { "Query": { "Commands": [ { "SemanticQueryDataShapeCommand": { "Query": { "Version": 2, "From": [ { "Name": "q1", "Entity": "CCRB Active - Oracle", "Type": 0 } ], "Select": [ { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Unique Id" }, "Name": "Query1.Unique Id" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Command" }, "Name": "Query1.Command1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Last Name" }, "Name": "Query1.Last Name1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "First Name" }, "Name": "Query1.First Name1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Rank" }, "Name": "Query1.Rank1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Shield No" }, "Name": "Query1.ShieldNo" } ], "OrderBy": [ { "Direction": 1, "Expression": { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Unique Id" } } } ] }, "Binding": { "Primary": { "Groupings": [ { "Projections": [ 0, 1, 2, 3, 4, 5 ] } ] }, "DataReduction": { "DataVolume": 3, "Primary": { "Window": { "Count": 500 } } }, "Version": 1 } } } ] }, "QueryId": "", "ApplicationContext": { "DatasetId": "523ab509-8e2d-43ed-bfad-11fcd05180d7", "Sources": [ { "ReportId": "f508555a-b39d-4c10-8d46-a14bc282e079" } ] } } ], "cancelQueries": [], "modelId": 404287 }
 
-COMPLAINT_INFO_QUERY = { "version": "1.0.0", "queries": [ { "Query": { "Commands": [ { "SemanticQueryDataShapeCommand": { "Query": { "Version": 2, "From": [ { "Name": "q1", "Entity": "CCRB Active - Oracle", "Type": 0 } ], "Select": [ { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Unique Id" }, "Name": "Query1.Unique Id" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Complaint ID" }, "Name": "CountNonNull(Query1.Complaint Id)1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Incident Date" }, "Name": "Query1.Incident Date" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "FADO Type" }, "Name": "Query1.FADO Type1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Allegation" }, "Name": "Query1.Allegation1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Board Disposition" }, "Name": "Query1.Board Disposition1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "NYPD Disposition" }, "Name": "Query1.NYPD Disposition" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Penalty" }, "Name": "Query1.PenaltyDesc1" } ], "Where": [ { "Condition": { "Not": { "Expression": { "Comparison": { "ComparisonKind": 0, "Left": { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Rn" } }, "Right": { "Literal": { "Value": "0L" } } } } } } } ], "OrderBy": [ { "Direction": 1, "Expression": { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Complaint ID" } } } ] }, "Binding": { "Primary": { "Groupings": [ { "Projections": [ 0, 1, 2, 3, 4, 5, 6, 7 ] } ] }, "DataReduction": { "DataVolume": 3, "Primary": { "Window": { "Count": 50 } } }, "Version": 1 } } } ] }, "QueryId": "", "ApplicationContext": { "DatasetId": "523ab509-8e2d-43ed-bfad-11fcd05180d7", "Sources": [ { "ReportId": "f508555a-b39d-4c10-8d46-a14bc282e079" } ] } } ], "cancelQueries": [], "modelId": 404287 }
+ACTIVE_COMPLAINT_INFO_QUERY = { "version": "1.0.0", "queries": [ { "Query": { "Commands": [ { "SemanticQueryDataShapeCommand": { "Query": { "Version": 2, "From": [ { "Name": "q1", "Entity": "CCRB Active - Oracle", "Type": 0 } ], "Select": [ { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Unique Id" }, "Name": "Query1.Unique Id" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Complaint ID" }, "Name": "CountNonNull(Query1.Complaint Id)1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Incident Date" }, "Name": "Query1.Incident Date" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "FADO Type" }, "Name": "Query1.FADO Type1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Allegation" }, "Name": "Query1.Allegation1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Board Disposition" }, "Name": "Query1.Board Disposition1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "NYPD Disposition" }, "Name": "Query1.NYPD Disposition" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Penalty" }, "Name": "Query1.PenaltyDesc1" } ], "Where": [ { "Condition": { "Not": { "Expression": { "Comparison": { "ComparisonKind": 0, "Left": { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Rn" } }, "Right": { "Literal": { "Value": "0L" } } } } } } } ], "OrderBy": [ { "Direction": 1, "Expression": { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Complaint ID" } } } ] }, "Binding": { "Primary": { "Groupings": [ { "Projections": [ 0, 1, 2, 3, 4, 5, 6, 7 ] } ] }, "DataReduction": { "DataVolume": 3, "Primary": { "Window": { "Count": 500 } } }, "Version": 1 } } } ] }, "QueryId": "", "ApplicationContext": { "DatasetId": "523ab509-8e2d-43ed-bfad-11fcd05180d7", "Sources": [ { "ReportId": "f508555a-b39d-4c10-8d46-a14bc282e079" } ] } } ], "cancelQueries": [], "modelId": 404287 }
+
+# inactive complaints just seem to replace the DataSet ID, the Report ID, and the modelID
+# TODO DRY this out 
+INACTIVE_OFFICER_INFO_QUERY = { "version": "1.0.0", "queries": [ { "Query": { "Commands": [ { "SemanticQueryDataShapeCommand": { "Query": { "Version": 2, "From": [ { "Name": "q1", "Entity": "CCRB Active - Oracle", "Type": 0 } ], "Select": [ { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Unique Id" }, "Name": "Query1.Unique Id" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Command" }, "Name": "Query1.Command1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Last Name" }, "Name": "Query1.Last Name1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "First Name" }, "Name": "Query1.First Name1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Rank" }, "Name": "Query1.Rank1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Shield No" }, "Name": "Query1.ShieldNo" } ], "OrderBy": [ { "Direction": 1, "Expression": { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Unique Id" } } } ] }, "Binding": { "Primary": { "Groupings": [ { "Projections": [ 0, 1, 2, 3, 4, 5 ] } ] }, "DataReduction": { "DataVolume": 3, "Primary": { "Window": { "Count": 500 } } }, "Version": 1 } } } ] }, "QueryId": "", "ApplicationContext": { "DatasetId": "e9651248-cbdf-498c-8b19-c7bdfbe87cc3", "Sources": [ { "ReportId": "737c2470-a2eb-4f5b-a133-bb9e089c3a65" } ] } } ], "cancelQueries": [], "modelId": 404284 }
+
+INACTIVE_COMPLAINT_INFO_QUERY = { "version": "1.0.0", "queries": [ { "Query": { "Commands": [ { "SemanticQueryDataShapeCommand": { "Query": { "Version": 2, "From": [ { "Name": "q1", "Entity": "CCRB Active - Oracle", "Type": 0 } ], "Select": [ { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Unique Id" }, "Name": "Query1.Unique Id" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Complaint ID" }, "Name": "CountNonNull(Query1.Complaint Id)1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Incident Date" }, "Name": "Query1.Incident Date" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "FADO Type" }, "Name": "Query1.FADO Type1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Allegation" }, "Name": "Query1.Allegation1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Board Disposition" }, "Name": "Query1.Board Disposition1" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "NYPD Disposition" }, "Name": "Query1.NYPD Disposition" }, { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Penalty" }, "Name": "Query1.PenaltyDesc1" } ], "Where": [ { "Condition": { "Not": { "Expression": { "Comparison": { "ComparisonKind": 0, "Left": { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Rn" } }, "Right": { "Literal": { "Value": "0L" } } } } } } } ], "OrderBy": [ { "Direction": 1, "Expression": { "Column": { "Expression": { "SourceRef": { "Source": "q1" } }, "Property": "Complaint ID" } } } ] }, "Binding": { "Primary": { "Groupings": [ { "Projections": [ 0, 1, 2, 3, 4, 5, 6, 7 ] } ] }, "DataReduction": { "DataVolume": 3, "Primary": { "Window": { "Count": 500 } } }, "Version": 1 } } } ] }, "QueryId": "", "ApplicationContext": { "DatasetId": "e9651248-cbdf-498c-8b19-c7bdfbe87cc3", "Sources": [ { "ReportId": "737c2470-a2eb-4f5b-a133-bb9e089c3a65" } ] } } ], "cancelQueries": [], "modelId": 404284 }
 
 def _get_window_options(query):
     return query["queries"][0]["Query"]["Commands"][0]["SemanticQueryDataShapeCommand"]["Binding"]["DataReduction"]["Primary"]["Window"]
@@ -42,16 +50,33 @@ def _add_restart_token(query, token_array):
         w["RestartTokens"] = token_array
     return query
 
-def _fetch_report(query, limit=None, restart_token=None):
+
+# TODO - DRY the hell out of this
+def _fetch_report(query, headers=HEADERS, limit=None, restart_token=None):
     _change_query_limit(query, limit)
     _add_restart_token(query, restart_token)
 
-    r = requests.post(QUERY_URL, headers=HEADERS, data=json.dumps(query))
+    r = requests.post(QUERY_URL, headers=headers, data=json.dumps(query))
     return r.json()
 
-def fetch_officer_data(limit=None, restart_token=None):
-    return _fetch_report(OFFICER_INFO_QUERY, limit, restart_token)
+def _fetch_active_report(query, limit=None, restart_token=None):
+    headers = HEADERS
+    headers['X-PowerBI-ResourceKey'] = "b2c8d2f2-3ad1-48dc-883c-d4163a6e2d8f"
+    return(_fetch_report(query, headers, limit, restart_token))
 
-def fetch_complaints(limit=None, restart_token=None):
-    return _fetch_report(COMPLAINT_INFO_QUERY, limit, restart_token)
+def _fetch_inactive_report(query, limit=None, restart_token=None):
+    headers = HEADERS
+    HEADERS['X-PowerBI-ResourceKey'] = "87914378-578f-4f43-b75e-8ddaeafbdda2"
+    return(_fetch_report(query, headers, limit, restart_token))
 
+def fetch_active_officer_data(limit=None, restart_token=None):
+    return _fetch_active_report(ACTIVE_OFFICER_INFO_QUERY, limit, restart_token)
+
+def fetch_active_complaints(limit=None, restart_token=None):
+    return _fetch_active_report(ACTIVE_COMPLAINT_INFO_QUERY, limit, restart_token)
+
+def fetch_inactive_officer_data(limit=None, restart_token=None):
+    return _fetch_inactive_report(INACTIVE_OFFICER_INFO_QUERY, limit, restart_token)
+
+def fetch_inactive_complaints(limit=None, restart_token=None):
+    return _fetch_inactive_report(INACTIVE_COMPLAINT_INFO_QUERY, limit, restart_token)
