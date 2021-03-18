@@ -1,3 +1,10 @@
+# scratch where i write everything from runs
+# eventually will just write the csv to github
+# once i'm happy with it
+scratch/
+
+.vscode/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
