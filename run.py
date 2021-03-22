@@ -8,14 +8,14 @@ from collections import namedtuple
 
 Report = namedtuple("Report", ["func", "filename"])
 
-active_officer = Report(fetch.fetch_active_officer_data, "active_officer")
-inactive_officer = Report(fetch.fetch_inactive_officer_data, "inactive_officer")
-active_complaint = Report(fetch.fetch_active_complaints, "active_complaint")
-inactive_complaint = Report(fetch.fetch_inactive_complaints, "inactive_complaint")
+active_officer = Report(fetch.fetch_active_officer_data, "active_officers")
+inactive_officer = Report(fetch.fetch_inactive_officer_data, "inactive_officers")
+active_complaint = Report(fetch.fetch_active_complaints, "active_complaints")
+inactive_complaint = Report(fetch.fetch_inactive_complaints, "inactive_complaints")
 
 def run(args):
 
-    filename_prefix = date.today().isoformat() 
+    #filename_prefix = date.today().isoformat() 
 
     reports_to_run = []
     if args.all:
@@ -42,7 +42,7 @@ def run(args):
         raise SystemExit("nothing to do, quitting")
 
     for report in reports_to_run: 
-        filename = "{}_{}.csv".format(filename_prefix, report.filename)
+        filename = "{}.csv".format(report.filename)
         scrape_to_filename(report.func, filename, limit=args.limit)
     
 
