@@ -6,12 +6,19 @@ import csv
 from datetime import date
 from collections import namedtuple
 
-Report = namedtuple("Report", ["func", "filename"])
+Report = namedtuple("Report", ["func", "filename", "cols"])
 
-active_officer = Report(fetch.fetch_active_officer_data, "active_officers")
-inactive_officer = Report(fetch.fetch_inactive_officer_data, "inactive_officers")
-active_complaint = Report(fetch.fetch_active_complaints, "active_complaints")
-inactive_complaint = Report(fetch.fetch_inactive_complaints, "inactive_complaints")
+# TODO - just pull these out of the data we get back 
+# 000002,001 DET,Smart,John,Police Officer,2323
+OFFICER_COLS = ["id", "command", "lastname", "firstname", "rank", "badge_no"]
+
+# 015156,200000038,2000-01-03,Abuse of Authority,Question and/or stop,Exonerated,blarg
+COMPLAINT_COLS = ["officer_id", "complaint_id", "date", "fado_type", "allegation", "board_disposition", "nypd_disposition", "penalty"]
+
+active_officer = Report(fetch.fetch_active_officer_data, "active_officers.csv", OFFICER_COLS)
+inactive_officer = Report(fetch.fetch_inactive_officer_data, "inactive_officers.csv", OFFICER_COLS)
+active_complaint = Report(fetch.fetch_active_complaints, "active_complaints.csv", COMPLAINT_COLS)
+inactive_complaint = Report(fetch.fetch_inactive_complaints, "inactive_complaints.csv", COMPLAINT_COLS)
 
 def run(args):
 
@@ -37,19 +44,21 @@ def run(args):
         if args.report == "complaint" and args.type == "inactive":
             reports_to_run.append(inactive_complaint)
 
-
     if not reports_to_run:
         raise SystemExit("nothing to do, quitting")
 
     for report in reports_to_run: 
-        filename = "{}.csv".format(report.filename)
-        scrape_to_filename(report.func, filename, limit=args.limit)
+        scrape_to_filename(report, limit=args.limit)
     
 
-def scrape_to_filename(report_func, filename, limit):
-    print("Fetching report, writing to {}".format(filename))
-    with open(filename, 'w') as csvfh:
+def scrape_to_filename(report, limit):
+    report_func = report.func
+
+    print("Fetching report, writing to {}".format(report.filename))
+    with open(report.filename, 'w') as csvfh:
         writer = csv.writer(csvfh)
+
+        writer.writerow(report.cols)
 
         restart_token = None
         # TODO take this out and add in a better check against looping forever
@@ -63,7 +72,6 @@ def scrape_to_filename(report_func, filename, limit):
 
             restart_token = extract.extract_restart_token(j)
             if restart_token:
-                print("Sleeping 2 seconds")
                 sleep(2)
             else:
                 print("Done!")
